@@ -34,6 +34,7 @@ L<List::Util>
 
 L<HTML::Entities>
 
+L<Digest::SHA1>
 
 
 You can install them all by running:
@@ -64,9 +65,9 @@ You can specify an alternate path to the configuration file on the commandline i
 
 By default, tircd listens on localhost port 6667.
 
-Connect to tircd, using your twitter username as your NICK. Send your twitter password with the PASS command. 
+Connect to tircd, using your twitter username as your NICK. Optionally, send a password with the PASS command. 
 
-With many irc clients you can do this by issuing the command /SERVER running tircd? 6667 <your twitter password> <your twitter username>. Check your client's documentation for the appropirate syntax. 
+With many irc clients you can do this by issuing the command /SERVER running tircd? 6667 <your password> <your twitter username>. Check your client's documentation for the appropirate syntax. 
 
 If this is your first connection tircd needs to be authorized to connect to twitter. This is done using OAuth.  Tircd will make a challenege to twitter, and twitter will provide a link to tircd for you to authorize the connection. Follow the link, make sure you are logged into twitter as the user you wish to use tircd as, and then click Allow to allow the connection. Twitter will then present you with a PIN number. To complete your connection to tircd, type: /stats pin <PIN NUMBER>. On some clients that honor the irc protocol and do not expect you to be sending a stats command before connecting you may have to type: /quote stats pin <PIN NUMBER>. Tircd will then attempt to authorize the connection using the provided PIN. 
 
