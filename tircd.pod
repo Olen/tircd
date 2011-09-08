@@ -39,7 +39,7 @@ L<Digest::SHA1>
 
 You can install them all by running:
 
-C<cpan -i POE POE::Filter::IRCD Net::Twitter::Lite JSON::Any Time::Local File::Glob IO::File LWP::UserAgent Storable URI List::Util HTML::Entities>
+C<cpan -i POE POE::Filter::IRCD Net::Twitter::Lite JSON::Any Time::Local File::Glob IO::File LWP::UserAgent Storable URI List::Util HTML::Entities Digest::SHA1>
 
 =head1 USAGE
 
@@ -67,9 +67,9 @@ By default, tircd listens on localhost port 6667.
 
 Connect to tircd, using your twitter username as your NICK. Optionally, send a password with the PASS command. 
 
-With many irc clients you can do this by issuing the command /SERVER running tircd? 6667 <your password> <your twitter username>. Check your client's documentation for the appropirate syntax. 
+With many irc clients you can do this by issuing the command C<< /SERVER <server> 6667 <your password> <your twitter username> >>. Check your client's documentation for the appropirate syntax. 
 
-If this is your first connection tircd needs to be authorized to connect to twitter. This is done using OAuth.  Tircd will make a challenege to twitter, and twitter will provide a link to tircd for you to authorize the connection. Follow the link, make sure you are logged into twitter as the user you wish to use tircd as, and then click Allow to allow the connection. Twitter will then present you with a PIN number. To complete your connection to tircd, type: /stats pin <PIN NUMBER>. On some clients that honor the irc protocol and do not expect you to be sending a stats command before connecting you may have to type: /quote stats pin <PIN NUMBER>. Tircd will then attempt to authorize the connection using the provided PIN. 
+If this is your first connection tircd needs to be authorized to connect to twitter. This is done using OAuth.  Tircd will make a challenege to twitter, and twitter will provide a link to tircd for you to authorize the connection. Follow the link, make sure you are logged into twitter as the user you wish to use tircd as, and then click Allow to allow the connection. Twitter will then present you with a PIN number. To complete your connection to tircd, type: C<< /stats pin <PIN NUMBER> >>. On some clients that honor the irc protocol and do not expect you to be sending a stats command before connecting you may have to type: C<< /quote stats pin <PIN NUMBER> >>. Tircd will then attempt to authorize the connection using the provided PIN. 
 
 =over
 
@@ -102,7 +102,7 @@ There is currently no way of regaining access to your account if you forget it. 
 
 =head2 After connecting
 
-Once connected JOIN #twitter to get started.  The channel #twitter is where you will perform most opertions
+Once connected C</JOIN #twitter> to get started.  The channel #twitter is where you will perform most opertions
 
 =over
 
@@ -156,11 +156,11 @@ If you want to create a channel with just a subset of the people you follow, you
 
 =item Search
 
-If you want to have updated search results for a specific term delivered, you can /join <any channel> then set the /topic for the channnel to your search query.  Results that match that query will be sent to that channel. The /topic can be almost anything supported by the twitter search (see http://search.twitter.com/operators for exmaples).  Using the 'near' option is not currently supported.
+If you want to have updated search results for a specific term delivered, you can C<< /join <any channel> >> then set the /topic for the channnel to your search query.  Results that match that query will be sent to that channel. The /topic can be almost anything supported by the twitter search (see L<http://search.twitter.com/operators> for exmaples).  Using the 'near' option is not currently supported.
 
 =item User config
 
-Certain options are changeable at runtime and set per user. To see a list of options and their current values simply send an "/stats m" command to the server.
+Certain options are changeable at runtime and set per user. To see a list of options and their current values simply send an C</stats m> command to the server.
 
 These options are saved in a file with the name C<Username.config> (where Username is your twitter username) located in a directory set in the global config file (default: /tmp/tricd)
 
@@ -216,3 +216,4 @@ L<List::Util>
 
 L<HTML::Entities>
 
+L<Digest::SHA1>
