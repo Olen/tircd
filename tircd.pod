@@ -69,32 +69,36 @@ Connect to tircd, using your twitter username as your NICK. Optionally, send a p
 
 With many irc clients you can do this by issuing the command C<< /SERVER <server> 6667 <your password> <your twitter username> >>. Check your client's documentation for the appropirate syntax. 
 
-If this is your first connection tircd needs to be authorized to connect to twitter. This is done using OAuth.  Tircd will make a challenege to twitter, and twitter will provide a link to tircd for you to authorize the connection. Follow the link, make sure you are logged into twitter as the user you wish to use tircd as, and then click Allow to allow the connection. Twitter will then present you with a PIN number. To complete your connection to tircd, type: C<< /stats pin <PIN NUMBER> >>. On some clients that honor the irc protocol and do not expect you to be sending a stats command before connecting you may have to type: C<< /quote stats pin <PIN NUMBER> >>. Tircd will then attempt to authorize the connection using the provided PIN. 
+If this is your first connection tircd needs to be authorized to connect to twitter. This is done using OAuth.  Tircd will make a challenege to twitter, and twitter will provide a link to tircd for you to authorize the connection. Follow the link, make sure you are logged into twitter as the user you wish to use tircd as, and then click Allow to allow the connection. Twitter will then present you with a PIN number. To complete your connection to tircd, type: C<< /STATS pin <PIN NUMBER> >>. On some clients that honor the irc protocol and do not expect you to be sending a stats command before connecting you may have to type: C<< /QUOTE STATS pin <PIN NUMBER> >>. Tircd will then attempt to authorize the connection using the provided PIN. 
 
 =over
 
 =item Connecting with password
 
-If your tircd installation is running in a shared environment (etiher listening on the localhost address on a shared computer, or listening on a public IP) you might want to password protect your account, or anyone can access your twitter account knowing the server address and your twitter username.
+If your tircd installation is running in a shared environment (either listening on the localhost address on a shared computer, or listening on a public IP) you might want to password protect your account, or anyone can access your twitter account knowing the server address and your twitter username.
 B<Your tircd-password do NOT need to be (and should not be!) the same as your twitter password.>
 
 Tircd supports password protection in the following way.
 
-* The first time you connect to tircd with a new Username, no password checking is done.  You are presented with the OAuth URL, and need to log in to twitter on the web, and enter the PIN as described above.
+=over
 
-* When the PIN is accepted, IF your client connected with a password set, this password is encrypted (hashed) and saved along with your twitter access-tokens.
+=item * The first time you connect to tircd with a new Username, no password checking is done.  You are presented with the OAuth URL, and need to log in to twitter on the web, and enter the PIN as described above.
 
-* Next time you connect, tircd will first check to see if a password is saved in your F<Username.config>, and comapre it with the one your client sends.
+=item * When the PIN is accepted, IF your client connected with a password set, this password is encrypted (hashed) and saved along with your twitter access-tokens.
 
-* If they match, your connecton is allowed, and tircd continue to verify the OAuth tokens with twitter.
+=item * Next time you connect, tircd will first check to see if a password is saved in your F<Username.config>, and comapre it with the one your client sends.
 
-* If they don't match, the client is disconnected with an error message.
+=item * If they match, your connecton is allowed, and tircd continue to verify the OAuth tokens with twitter.
 
-* If you want to change your password, or did not set one on your first connection, you can do so after you have connected to tircd with a simple C<< /STATS password <password> >>
+=item * If they don't match, the client is disconnected with an error message.
 
-* Be aware that if you do this, you will also have to make sure your client uses the same password next time you connect to tircd.
+=item * If you want to change your password, or did not set one on your first connection, you can do so after you have connected to tircd with a simple C<< /STATS password <password> >>
 
-* If you want to remove the password, simply issue a C</STATS password> without any password set.
+=item * Be aware that if you do this, you will also have to make sure your client uses the same password next time you connect to tircd.
+
+=item * If you want to remove the password, simply issue a C</STATS password> without any password set.
+
+=back
 
 There is currently no way of regaining access to your account if you forget it.  To reset your tircd password, you will have to remove your Username.config and authorize with twitter using OAuth and a PIN again.
 
