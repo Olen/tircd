@@ -1480,18 +1480,18 @@ sub twitter_timeline {
           my $search = "@" . $user->{'screen_name'};
           my $replace = "@" . $user->{'screen_name'} . " (" . $user->{'name'} . ")";
 
-          $item->{'text'} =~ s/$search/$replace/g;
+          $item->{'text'} =~ s/$search/$replace/ig;
 
           # Also replace text in retweets
           if (defined($item->{'retweeted_status'})) {
-            $item->{'retweeted_status'}->{'text'} =~ s/$search/$replace/g;
+            $item->{'retweeted_status'}->{'text'} =~ s/$search/$replace/ig;
             if ($user->{'screen_name'} eq $item->{'retweeted_status'}->{'user'}->{'screen_name'}) {
               # If the text does not contain the username of the person being retweeted
               # also add realname first in text
               if ($item->{'retweeted_status'}->{'text'} !~ /$item->{'retweeted_status'}->{'user'}->{'screen_name'}/) {
                 my $search = "^";
                 my $replace = "(" . $user->{'name'} . ") ";
-                $item->{'retweeted_status'}->{'text'} =~ s/$search/$replace/g;
+                $item->{'retweeted_status'}->{'text'} =~ s/$search/$replace/ig;
               }
             }
           }
