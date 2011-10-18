@@ -1131,14 +1131,26 @@ sub irc_twitterbot_command {
   if ($data =~ /^\s*!(rt|retweet)/i) {
     (my $ticker_slot_selected = $data) =~ s/\s*!(rt|retweet)\s*//i;
     my $tweet_id = $heap->{'timeline_ticker'}->{$ticker_slot_selected};
-    $kernel->post('logger','log',"Got tweet_id of $tweet_id for slot $ticker_slot_selected",$heap->{'username'});
-    $kernel->yield('twitter_retweet_tweet',$tweet_id);
+    if ($tweet_id) {
+      $kernel->post('logger','log',"Got tweet_id of $tweet_id for slot $ticker_slot_selected",$heap->{'username'});
+      $kernel->yield('twitter_retweet_tweet',$tweet_id);
+    }
+    else {
+      $kernel->post('logger','log',"Could not find any tweet_id for slot $ticker_slot_selected",$heap->{'username'});
+      $kernel->yield('server_reply',304,"Could not find any tweet_id for slot $ticker_slot_selected");
+    }
   }
   if ($data =~ /^\s*!(conv|conversation)/i) {
     (my $ticker_slot_selected = $data) =~ s/\s*!(conv|conversation)\s*//i;
     my $tweet_id = $heap->{'timeline_ticker'}->{$ticker_slot_selected};
-    $kernel->post('logger','log',"Got tweet_id of $tweet_id for slot $ticker_slot_selected",$heap->{'username'});
-    $kernel->yield('twitter_conversation',$tweet_id);
+    if ($tweet_id) {
+      $kernel->post('logger','log',"Got tweet_id of $tweet_id for slot $ticker_slot_selected",$heap->{'username'});
+      $kernel->yield('twitter_conversation',$tweet_id);
+    }
+    else {
+      $kernel->post('logger','log',"Could not find any tweet_id for slot $ticker_slot_selected",$heap->{'username'});
+      $kernel->yield('server_reply',304,"Could not find any tweet_id for slot $ticker_slot_selected");
+    }
   }
   if ($data =~ /^\s*!(save)/i) {
     $kernel->yield('save_config');
